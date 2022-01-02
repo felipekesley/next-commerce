@@ -10,6 +10,7 @@ export default function Product() {
 	const dispatch = useDispatch()
 	const cart = useSelector((state) => state.CartReducer)
 
+	// Recupera a rota e parametros
 	const router = useRouter()
 	const slug = router.query.slug
 	const cat = router.query.cat
@@ -44,6 +45,7 @@ export default function Product() {
 		getCategory()
 	}, [slug, cat])
 
+	// Adiciona o produto no carrinho
 	const handleAdd = () => {
 		let newProduct = true
 		cart.products.forEach((product, index) => {

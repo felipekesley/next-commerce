@@ -14,8 +14,16 @@ export const Content = styled.div`
 		vertical-align: middle;
 	}
 
-	.table > tr {
+	.table tr {
 		text-align: left;
+	}
+
+	.table .td-img {
+		min-width: 2rem;
+	}
+
+	.table .remove {
+		width: 2.5rem;
 	}
 
 	.table .center {
@@ -28,26 +36,7 @@ export const Hr = styled.hr`
 	margin: 2rem 0 4rem 0;
 `
 
-export const BgImg = styled.div`
-	display: block;
-	width: 100%;
-	padding: 1rem 0;
-	background-color: ${({ theme }) => theme.colors.lightGray};
-`
-
-export const BoxImg = styled.div`
-	width: 100%;
-	position: relative;
-	&:before {
-		content: '';
-		display: block;
-		padding-top: 100%;
-		width: 100%;
-	}
-`
-
 export const Flex = styled.div`
-	display: Flex;
-	align-items: center;
-	gap: 1rem;
+	display: flex;
+	justify-content: flex-end;
 `

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import { Container, Col, Row, Text, Heading } from 'src/components/All'
 import Image from 'next/image'
 import { Button } from 'react-bootstrap'
@@ -37,6 +38,16 @@ const ProductView = (props) => {
 			</Container>
 		</Style.Content>
 	)
+}
+
+ProductView.propTypes = {
+	altImg: PropTypes.string,
+	img: PropTypes.string,
+	category: PropTypes.string,
+	title: PropTypes.string,
+	price: PropTypes.string,
+	description: PropTypes.string,
+	onClick: PropTypes.func
 }
 
 export default ProductView

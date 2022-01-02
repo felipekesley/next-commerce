@@ -13,8 +13,9 @@ const Header = () => {
 	const router = useRouter()
 	const dispatch = useDispatch()
 	const cart = useSelector((state) => state.CartReducer)
-	console.log(cart)
+	//console.log(cart)
 
+	// atualiza o total do carrinho
 	useEffect(() => {
 		let total = 0
 		cart.products.forEach((product) => {
