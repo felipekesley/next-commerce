@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import { useRouter } from 'next/router'
+//import { useRouter } from 'next/router'
 // import { useDispatch, useSelector } from 'react-redux'
 import { Button, Form } from 'react-bootstrap'
 import { Container, Heading, Row, Col } from 'src/components/All'
+import { Http } from 'src/services/api'
 // import { ChangeCart } from '../../store/actions/cart.action'
 
 import styled from 'styled-components'
@@ -42,35 +43,56 @@ export const Flex = styled.div`
 `
 
 const CheckoutPage = () => {
-	const router = useRouter()
-
-	const handleRegister = () => {
-		router.push('/register')
-	}
-
-	// Validate react bootstrap
 	const [validated, setValidated] = useState(false)
+	const [formValues, setFormValues] = useState({})
 
 	const handleSubmit = (e) => {
 		e.preventDefault()
+
+		// get values
+		const formData = new FormData(e.target)
+		const data = Object.fromEntries(formData)
+		console.log(data)
+
+		// react bootstrap
 		const form = e.currentTarget
 		if (form.checkValidity() === false) {
 			e.stopPropagation()
+		} else {
+			const register = async () => {
+				try {
+					const fields = {
+						email: data.email,
+						password: data.password
+					}
+					const response = await Http.post('auth/register', fields)
+					console.log(response)
+				} catch (Error) {
+					console.log(Error)
+					//localStorage.removeItem('access_token')
+					//window.location.replace('login')
+				}
+			}
+			register()
 		}
 
 		setValidated(true)
+	}
 
-		console.log(form)
+	const handleInputChange = (e) => {
+		const { name, value } = e.target
+		setFormValues({ ...formValues, [name]: value })
+		//console.log(name, value)
 	}
 
 	return (
 		<Content>
 			<Container>
-				<Heading type="h2">Checkout</Heading>
+				<Heading type="h2">Register</Heading>
 				<Hr />
 				<Row>
 					<Col size="col-lg-6 offset-lg-3 col-12">
-						<Heading type="h5">please login to continue</Heading>
+						<Heading type="h5">Register to checkout</Heading>
 						<Form
 							noValidate
 							validated={validated}
@@ -80,17 +102,18 @@ const CheckoutPage = () => {
 								required
 								type="email"
 								placeholder="Email"
+								name="email"
+								onChange={handleInputChange}
 							/>
 							<Form.Control
 								required
 								type="password"
 								placeholder="Password"
+								name="password"
+								onChange={handleInputChange}
 							/>
 							<Flex className="gap">
 								<Button variant="dark" type="submit">
-									Login
-								</Button>
-								<Button type="submit" onClick={handleRegister}>
 									Register
 								</Button>
 							</Flex>

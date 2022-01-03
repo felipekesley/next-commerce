@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-export const API_URL = 'https://json-server-store.herokuapp.com'
+export const API_URL =
+	'https://cors-resolve-app.herokuapp.com/https://json-server-store.herokuapp.com'
 
 export const Http = axios.create({
 	baseURL: API_URL,
